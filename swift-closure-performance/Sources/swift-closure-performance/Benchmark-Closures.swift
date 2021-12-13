@@ -33,6 +33,12 @@ func g() -> Int {
     return g()
 }
 
+struct I {
+    func callAsFunction() -> () -> () -> () -> () -> () -> () -> () -> () -> () -> () -> Int {
+        {{{{{{{{{{ max(1, 100) }}}}}}}}}}
+    }
+}
+
 let closureSuite = BenchmarkSuite(name: "Closures") { suite in
     suite.benchmark("Escaping") {
         precondition(f()()()()()()()()()() == 100)
@@ -49,5 +55,10 @@ let closureSuite = BenchmarkSuite(name: "Closures") { suite in
 
     suite.benchmark("Function") {
         precondition(g() == 100)
+    }
+
+    suite.benchmark("callAsFunction") {
+        let i = I()
+        precondition(i()()()()()()()()()()() == 100)
     }
 }
